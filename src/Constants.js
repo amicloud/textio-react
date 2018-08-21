@@ -29,7 +29,7 @@ class Constants {
             case Constants.environments.test:
                 break;
             case Constants.environments.staging:
-                url = "http://textio-api-staging.herokuapp.com/";
+                url = "https://textio-api-staging.herokuapp.com/";
                 break;
             case Constants.environments.prod:
                 break;
