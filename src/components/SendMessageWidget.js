@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import Constants from "../Constants";
 
 class SendMessageWidget extends Component {
 
@@ -27,7 +28,7 @@ class SendMessageWidget extends Component {
             toNumber: this.state.toNumber,
             body: this.state.message
         };
-        axios.post('http://localhost:3001/api/v1/messages/send_message', params)
+        axios.post(Constants.apiEndpoints.messages.send_message, params)
             .then((response) => {
                 console.log(response);
             })

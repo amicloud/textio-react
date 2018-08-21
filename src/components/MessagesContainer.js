@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import Message from './Message'
+import Constants from '../Constants'
 import axios from 'axios'
 
 class MessagesContainer extends Component {
     componentDidMount() {
-        axios.get('http://localhost:3001/api/v1/messages/index.json')
+        axios.get(Constants.apiEndpoints.messages.index)
             .then(response => {
                 console.log(response);
                 this.setState({messages: response.data})
