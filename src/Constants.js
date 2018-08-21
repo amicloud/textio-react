@@ -6,7 +6,6 @@ class Constants {
         test: "TESTING"
     };
 
-
     static apiEndpoints = {
       messages: {
           index: Constants.getApiUrl() + "api/v1/messages/index.json",

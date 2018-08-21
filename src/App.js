@@ -14,7 +14,6 @@ class App extends Component {
                     <img src={logo} className="App-logo" alt="logo"/>
                 </header>
                 <br/>
-                <SendMessageWidget/>
                 <MessagesContainer/>
             </div>
         );

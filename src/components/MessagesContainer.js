@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Message from './Message'
 import Constants from '../Constants'
 import axios from 'axios'
+import SendMessageWidget from "./SendMessageWidget";
 
 class MessagesContainer extends Component {
     componentDidMount() {
@@ -23,6 +24,8 @@ class MessagesContainer extends Component {
     render() {
         return (
             <div className="messages-container">
+                <SendMessageWidget/>
+                <br/>
                 {this.state.messages.map((message) => {
                     return (<Message message={message} key={message.id}/>)
                 })}

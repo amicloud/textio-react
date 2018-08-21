@@ -35,19 +35,17 @@
   background-color: #efefef;
   box-shadow: #222222 2px 2px 3px;
   flex: 1 1 auto;
-}
+  * {
+    font-size: 1em;
+    margin: 0;
+  }
+  h1 {
+    margin-left: 5px;
+  }
+  p {
+    font-size: .75em;
+  }
 
-.message > * {
-  font-size: 1em;
-  margin: 0;
-}
-
-.message > h1 {
-  margin-left: 5px;
-}
-
-.message > p {
-  font-size: .75em;
 }
 
 .messages-container {
@@ -55,7 +53,11 @@
   width: 75%;
   display: flex;
   flex-flow: row wrap;
-
+  .send-message-widget{
+    width: 100%;
+    flex-grow: 1;
+    flex-shrink: 0;
+  }
 }
 
 input {
