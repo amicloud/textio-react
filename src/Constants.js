@@ -8,8 +8,8 @@ class Constants {
 
     static apiEndpoints = {
       messages: {
-          index: Constants.getApiUrl() + "api/v1/messages/index.json",
-          send_message: Constants.getApiUrl() + "api/v1/messages/send_message"
+          index: Constants.getApiUrl() + "api/v1/messages",
+          send_message: Constants.getApiUrl() + "api/v1/messages/sms-outgoing"
       }
     };
 
@@ -18,12 +18,13 @@ class Constants {
     };
 
     static getApiUrl() {
+        return "https://textiodev.ngrok.io/";
         const env = process.env.REACT_APP_ENVIRONMENT;
         console.log(env);
         let url = "";
         switch(env){
             case Constants.environments.dev:
-                url = "http://localhost:3001/";
+                url = "https://textiodev.ngrok.io/";
                 break;
             case Constants.environments.test:
                 break;
@@ -33,6 +34,7 @@ class Constants {
             case Constants.environments.prod:
                 break;
         }
+        console.log(url);
         return url;
     };
 }

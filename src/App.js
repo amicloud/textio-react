@@ -3,7 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 import './bootstrap.css'
 import MessagesContainer from './components/MessagesContainer.js'
-import SendMessageWidget from './components/SendMessageWidget.js'
 
 class App extends Component {
     render() {
