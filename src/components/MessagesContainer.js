@@ -3,6 +3,7 @@ import Message from './Message'
 import Constants from '../Constants'
 import axios from 'axios'
 import SendMessageWidget from "./SendMessageWidget";
+import SlideDownOptionsBar from "./SlideDownOptionsBar";
 
 class MessagesContainer extends Component {
     componentDidMount() {
@@ -18,7 +19,7 @@ class MessagesContainer extends Component {
         super(props);
         this.state = {
             messages: []
-        }
+        };
     }
 
     render() {
@@ -27,7 +28,9 @@ class MessagesContainer extends Component {
                 <SendMessageWidget/>
                 <br/>
                 {this.state.messages.map((message) => {
-                    return (<Message message={message} key={message.id}/>)
+                    return (
+                        <Message message={message} key={message.id} show={true}/>
+                    )
                 })}
             </div>
         )

@@ -5,6 +5,7 @@ import Constants from "../Constants";
 class SendMessageWidget extends Component {
 
     constructor(props) {
+        console.log(process.env.REACT_APP_API_URL);
         super(props);
         this.state = {message: "", toNumber: "", fromNumber: "17608886443"};
         this.handleChangeMessage = this.handleChangeMessage.bind(this);
@@ -25,10 +26,10 @@ class SendMessageWidget extends Component {
         console.log("submitting");
         let params = {
             fromNumber: this.state.fromNumber,
-            toNumber: this.state.toNumber,
+            toNumber: process.env.NODE_ENV === 'development' ? 7603832457 : this.state.toNumber,
             body: this.state.message
         };
-        axios.post(Constants.apiEndpoints.messages.send_message, params)
+        axios.post(Constants.apiEndpoints.messages.smsOutgoing, params)
             .then((response) => {
                 console.log(response);
             })
