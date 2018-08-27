@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import SlideDownOptionsBar from './SlideDownOptionsBar.js'
 import axios from 'axios'
 import Constants from "../Constants";
+import MessageOptionsBar from './SlideDownOptionsBar.js'
 
 class Message extends Component {
     constructor(props) {
@@ -9,16 +9,27 @@ class Message extends Component {
         this.state = {
             message: props.message,
             show: props.show,
+            tabIndex: 9999
         };
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.onBlur = this.onBlur.bind(this);
+        // this.onFocus = this.onFocus.bind(this);
+    }
+
+    handleClick(){
+
+        this.setState({tabIndex: 0});
+        this.state.showOptionsBar ? this.setState({showOptionsBar: false}) : this.setState({showOptionsBar: true});
+    }
+
+    onBlur(e){
+        this.setState({showOptionsBar: false});
     }
 
     handleDelete() {
-        console.log("Sending Delete Request");
-        axios.delete(Constants.apiEndpoints.messages.delete + this.state.message.id)
+        axios.delete(Constants.apiEndpoints.messages.destroy + this.state.message.id)
             .then((response) => {
-                console.log(response);
-                // this.state.deleteCallback.call(this.state.messageKey);
                 this.setState({show: false});
             })
             .catch((error) => {
@@ -27,14 +38,13 @@ class Message extends Component {
     };
 
     render() {
-        let s = this.state;
         if(this.state.show){
+            let s = this.state;
+            let suffix = s.message.direction === 'outbound_api' ? 'outbound' : 'inbound';
             return (
-                <div className="message" onClick={this.handleClick}>
-                    <p>From {formatPhoneNumber(s.message.fromNumber)}</p>
-                    <p>To {formatPhoneNumber(s.message.toNumber)}</p>
+                <div className={'message message-' + suffix} onBlur={this.onBlur} onClick={this.handleClick} tabIndex={s.tabIndex}>
                     <h1>{s.message.body}</h1>
-                    <SlideDownOptionsBar id={s.message.id} deleteCallback={this.handleDelete}/>
+                    <MessageOptionsBar id={s.message.id} deleteCallback={this.handleDelete} show={s.showOptionsBar} messageStatus={s.message.smsStatus}/>
                 </div>
             )
         }

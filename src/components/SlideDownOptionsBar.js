@@ -6,18 +6,27 @@ class MessageOptionsBar extends Component {
         super();
         this.state = {
             messageID: props.id,
-            deleteCallback: props.deleteCallback
+            deleteCallback: props.deleteCallback,
+            messageStatus: props.messageStatus
         };
     }
 
-    render() {
-        return (
-            <div className='slide-down-options-bar'>
-                <div onClick={this.state.deleteCallback} className='delete-button'>Delete</div>
-            </div>
-        )
+    componentWillReceiveProps(nextProps){
+        this.setState({show: nextProps.show});
     }
 
+    render() {
+        if (this.state.show) {
+            return (
+                <div className='slide-down-options-bar'>
+                    <div onClick={this.state.deleteCallback} className='delete-button'>Delete</div>
+                    <div className='message-status'>{this.state.messageStatus}</div>
+                </div>
+            )
+        } else {
+            return null;
+        }
+    }
 }
 
 export default MessageOptionsBar

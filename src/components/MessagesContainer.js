@@ -1,39 +1,46 @@
 import React, {Component} from 'react'
 import Message from './Message'
-import Constants from '../Constants'
+import Constants from "../Constants";
 import axios from 'axios'
-import SendMessageWidget from "./SendMessageWidget";
-import SlideDownOptionsBar from "./SlideDownOptionsBar";
 
 class MessagesContainer extends Component {
-    componentDidMount() {
-        axios.get(Constants.apiEndpoints.messages.index)
-            .then(response => {
-                console.log(response);
-                this.setState({messages: response.data})
-            })
-            .catch(error => console.log(error))
-    }
 
     constructor(props) {
         super(props);
         this.state = {
-            messages: []
+            conversation_id: props.conversation_id
         };
     }
 
+    componentWillReceiveProps(nextProps){
+        this.setState({messages: nextProps.messages});
+    }
+
+    componentDidMount(){
+        let id = 'messages-container-conversation-' + this.state.conversation_id;
+        let container = document.getElementById(id);
+        if(!container){
+            console.log('yunull');
+            return;
+        }
+        container.scrollTop = container.scrollHeight;
+    }
+
     render() {
-        return (
-            <div className="messages-container">
-                <SendMessageWidget/>
-                <br/>
-                {this.state.messages.map((message) => {
-                    return (
-                        <Message message={message} key={message.id} show={true}/>
-                    )
-                })}
-            </div>
-        )
+        console.log(this.state.messages);
+        if (this.state.messages) {
+            return (
+                <div id={'messages-container-conversation-' + this.state.conversation_id} className="messages-container">
+                    {this.state.messages.map((message) => {
+                        return (
+                            <Message message={message} key={message.id} show={true}/>
+                        )
+                    })}
+                </div>
+            )
+        } else {
+            return null;
+        }
     }
 
 }

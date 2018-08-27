@@ -6,11 +6,18 @@ class Constants {
     };
 
     static apiEndpoints = {
-      messages: {
-          index: process.env.REACT_APP_API_URL + "api/v1/messages",
-          smsOutgoing: process.env.REACT_APP_API_URL + "api/v1/messages/sms-outgoing",
-          delete: process.env.REACT_APP_API_URL + "api/v1/messages/"
-      }
+        messages: {
+            index: process.env.REACT_APP_API_URL + "api/v1/messages",
+            smsOutgoing: process.env.REACT_APP_API_URL + "api/v1/messages/sms-outgoing",
+            destroy: process.env.REACT_APP_API_URL + "api/v1/messages/"
+        },
+        conversations: {
+            index: process.env.REACT_APP_API_URL + 'api/v1/conversations',
+            create: process.env.REACT_APP_API_URL + 'api/v1/conversations',
+            show: process.env.REACT_APP_API_URL + 'api/v1/conversations/',
+            update: process.env.REACT_APP_API_URL + 'api/v1/conversations/',
+            destroy: process.env.REACT_APP_API_URL + 'api/v1/conversations/'
+        }
     };
 }
 
